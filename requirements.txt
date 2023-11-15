@@ -1,4 +1,4 @@
 aiohttp==3.8.6
 beautifulsoup4==4.12.2
-fastapi==0.104.1
+fastapi
 requests==2.31.0
