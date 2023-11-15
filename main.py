@@ -2,7 +2,6 @@ from fastapi import FastAPI
 import uvicorn
 from app.configs.environment import Environment
 from routes.api import router
-from dotenv import dotenv_values
 
 config = Environment()
 app = FastAPI()

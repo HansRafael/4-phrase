@@ -1,4 +1,3 @@
-import asyncio
 from typing_extensions import Annotated
 from fastapi import (APIRouter, Depends, Request, status)
 from typing import List
