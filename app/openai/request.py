@@ -1,5 +1,5 @@
 import os
-import openai
+"""import openai
 openai.api_key = os.getenv("OPENAI_API_KEY", "")
 
 def create_request():
@@ -11,5 +11,5 @@ def create_request():
     ]
     )
 
-    return completion
+    return completion """
 
