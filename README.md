@@ -44,9 +44,6 @@
 ## Deployment 🚀
 This project is deployed on [Render](https://render.com/), and you can access the API at [https://four-word.onrender.com](https://four-word.onrender.com). Explore the world of words effortlessly! 🌐📖
 
-
-Certainly! Let's provide more detailed instructions for step 1 in the "How to Run" section:
-
 ## How to Run 🏃‍♂️
 
 ### Step 1: Create a Python Virtual Environment
