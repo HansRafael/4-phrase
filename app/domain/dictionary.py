@@ -27,10 +27,11 @@ class DictionaryResponse(BaseModel):
     source_found: int
     definition_found: int
 
-    def count_defnition_founded(self) -> int:
+    def count_definition_founded(self) -> int:
         definition_found = 0
-        for source in self.content:
-            definition_found += len(source.meaning)
+        if self.content:
+            for source in self.content:
+                definition_found += len(source.meaning)
         return definition_found
 
 

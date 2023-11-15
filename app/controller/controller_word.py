@@ -6,8 +6,10 @@ from app.domain.mapper.map_urban_dictionary import MapUrbanDictionaryToDictionar
 from app.domain.word_params import WordQueryParams
 from app.http.core_service import CoreService
 from app.http.http_client import HTTPClient
-from app.webscraping.oxford import OxfordScraping
 
+from app.configs.logger import get_logger
+
+logger = get_logger(__name__)
 
 class ControllerWord:
     def __init__(self, query_params: WordQueryParams, body: dict = None) -> None:
@@ -31,10 +33,13 @@ class ControllerWord:
         return results.get('oxford_page')
 
     async def __get_word_definition(self) -> Dictionary:
+        logger.info(f'Starting process to get definition for {self.word.upper()} word.')
         words = []
         words.append(await self.__get_word_definition_from_api())
         words.append(await self.__get_word_definition_from_web_scraping())
 
+        words = [word for word in words if word != None]
+        logger.info('Ending process.')
         return words
     
     def request(self) -> DictionaryResponse:
@@ -45,5 +50,5 @@ class ControllerWord:
             content=response,
             source_found=len(response),
             definition_found=0)
-        word.definition_found = word.count_defnition_founded()
+        word.definition_found = word.count_definition_founded()
         return word
