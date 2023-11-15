@@ -1,12 +1,13 @@
 from fastapi import FastAPI
 import uvicorn
+from app.configs.environment import Environment
 from routes.api import router
 from dotenv import dotenv_values
 
-config = dotenv_values(".env")
+config = Environment()
 app = FastAPI()
 
 app.include_router(router)
 
 if __name__ == '__main__': #this indicates that this a script to be run
-    uvicorn.run("main:app", host='127.0.0.1', port=8000, log_level="info", reload = True)
+    uvicorn.run("main:app", host=config.HOST, port=int(config.PORT), log_level="info", reload = True)
