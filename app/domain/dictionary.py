@@ -6,6 +6,7 @@ from pydantic import BaseModel
 class Sources(str, Enum):
     URBAN_DICTIONARY = 'Urban Dictionary'
     OXFORD_DICTIONARY = 'Oxford Dictionary'
+    CAMBRIDGE_DICTIONARY = 'Cambridge Dictionary'
 
 class MeaningWord(BaseModel):
     definition: str = ''

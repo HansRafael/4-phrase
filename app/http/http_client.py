@@ -20,14 +20,14 @@ class HTTPClient:
             if e.status_code == 404:
                 logger.warning(f'Word not found! :: {url}')
             logger.warning(e.detail)
-            return None
+            return {}
         except ClientConnectorError as ex:
             logger.error(ex.os_error.strerror)
             logger.error(ex.host)
-            return None
+            return {}
         except Exception as ex:
             logger.error(ex)
-            return None
+            return {}
 
     async def _request_handler(self, http_response: ClientResponse, get_html_page=False):
         if http_response.status == 200:

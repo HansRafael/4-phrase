@@ -18,27 +18,27 @@ class ControllerWord:
         self.word = query_params.word
         self.core_service = CoreService(client=self.client)
 
-    async def __get_word_definition_from_api(self):
+    async def __get_word_definition_from_api(self) -> [Dictionary]:
         urban = await self.core_service.get_definition_from_urban_dictionary(word=self.word)
-        return urban
+        return [urban]
 
-    async def __get_word_definition_from_web_scraping(self) -> Dictionary:
+    async def __get_word_definition_from_web_scraping(self) -> [Dictionary]:
         tasks = {
-            'oxford_page': self.core_service.get_definition_from_oxford(word=self.word)
+            'oxford': self.core_service.get_definition_from_oxford(word=self.word),
+            'cambridge': self.core_service.get_definition_from_cambridge(word=self.word)
         }
 
-        results = await asyncio.gather(*tasks.values())
-        results = {key: result for key, result in zip(tasks.keys(), results)}
-
-        return results.get('oxford_page')
+        return await asyncio.gather(*tasks.values())
 
     async def __get_word_definition(self) -> Dictionary:
         logger.info(f'Starting process to get definition for {self.word.upper()} word.')
-        words = []
-        words.append(await self.__get_word_definition_from_api())
-        words.append(await self.__get_word_definition_from_web_scraping())
 
-        words = [word for word in words if word != None]
+        words = [
+            *await self.__get_word_definition_from_api(),
+            *await self.__get_word_definition_from_web_scraping()
+        ]
+
+        words = [word for word in words if word != {}]
         logger.info('Ending process.')
         return words
     
