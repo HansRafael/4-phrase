@@ -2,6 +2,11 @@
 
 4-Phrase is a powerful API designed for fetching word meanings from various online sources, including Urban Dictionary and Oxford Dictionary. Dive into the world of words and expressions with ease!
 
+## Deployment 🚀
+This project is deployed on [Render](https://render.com/), and you can access the API via [https://four-word.onrender.com](https://four-word.onrender.com) url.
+
+If you want to explore it out, go to [Swagger](https://four-word.onrender.com/docs) and test the API directl in your browser.
+
 ## Project Structure 🌳
 
 ```
@@ -40,9 +45,6 @@
 - Async
 - BeautifulSoup4
 - Requests
-
-## Deployment 🚀
-This project is deployed on [Render](https://render.com/), and you can access the API at [https://four-word.onrender.com](https://four-word.onrender.com). Explore the world of words effortlessly! 🌐📖
 
 ## How to Run 🏃‍♂️
 
