@@ -10,33 +10,36 @@ If you want to explore it out, go to [Swagger](https://four-word.onrender.com/do
 ## Project Structure 🌳
 
 ```
+.
 ├── app
-│   ├── configs
-│   │   ├── environment.py
-│   │   └── logger.py
-│   ├── controller
-│   │   ├── controller_word.py
-│   ├── domain
-│   │   ├── mapper
-│   │   │   ├── map_urban_dictionary.py
-│   │   ├── dictionary.py
-│   │   └── word_params.py
-│   ├── endpoints
-│   │   ├── phrase.py
-│   │   └── word.py
-│   ├── http
-│   │   ├── core_service.py
-│   │   ├── http_client.py
-│   ├── models
-│   ├── openai
-│   │   └── request.py
-│   ├── webscraping
-│   │   └── oxford.py
+│   ├── configs
+│   │   ├── environment.py
+│   │   └── logger.py
+│   ├── controller
+│   │   ├── controller_word.py
+│   ├── domain
+│   │   ├── mapper
+│   │   │   ├── map_urban_dictionary.py
+│   │   ├── dictionary.py
+│   │   └── word_params.py
+│   ├── endpoints
+│   │   ├── phrase.py
+│   │   └── word.py
+│   ├── http
+│   │   ├── core_service.py
+│   │   ├── http_client.py
+│   ├── models
+│   ├── openai
+│   │   └── request.py
+│   ├── webscraping
+│   │   ├── britannica.py
+│   │   ├── cambridge.py
+│   │   └── oxford.py
 ├── routes
-│   ├── api.py
+│   ├── api.py
 ├── main.py
 ├── README.md
-├── requirements.txt
+└── requirements.txt
 ```
 
 ## Technologies Used 🛠️

@@ -5,23 +5,23 @@ from app.configs.logger import get_logger
 
 logger = get_logger(__name__)
 
-class CambridgeScraping():
+class BritannicaScraping():
     def __init__(self, web_response, url) -> Dictionary:
         self.web_page = BeautifulSoup(web_response, 'html.parser')
-        self.dictionary = Dictionary(source=Sources.CAMBRIDGE_DICTIONARY.value, source_url=url)
+        self.dictionary = Dictionary(source=Sources.BRITANNICA_DICTIONARY.value, source_url=url)
 
-    def get_definition_from_cambridge_dictionary(self):
+    def get_definition_from_britannica_dictionary(self):
         try:
-            senses = self.web_page.find_all('div', class_='def-block ddef_block')
+            senses = self.web_page.find_all('div', class_='scnt')
             
             for s in senses:
                 meaning = MeaningWord()
-                definition = s.find('div', class_='def ddef_d db').text
+                definition = s.find('span', class_='def_text').text
                 meaning.definition = definition
 
-                examples = s.find_all('div', class_='def-body ddef_b')
+                examples = s.find_all('ul', class_='vis collapsed')
                 for e in examples:
-                    for ex in e.find_all('span', class_='eg deg'):
+                    for ex in e.find_all('li', class_='vi'):
                         if ex:
                             meaning.examples.append(ex.text)
                 self.dictionary.meaning.append(meaning)
