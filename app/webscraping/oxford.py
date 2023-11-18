@@ -23,7 +23,8 @@ class OxfordScraping():
                 examples = s.find_all('ul', class_='examples')
                 for e in examples:
                     for ex in e.find_all('li'):
-                        meaning.examples.append(ex.text)
+                        if ex:
+                            meaning.examples.append(ex.text)
                 self.dictionary.meaning.append(meaning)
         except Exception as ex:
             logger.warning(ex)

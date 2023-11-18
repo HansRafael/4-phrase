@@ -5,6 +5,7 @@ from app.configs.environment import Environment
 from app.domain.dictionary import Dictionary
 from app.domain.mapper.map_urban_dictionary import MapUrbanDictionaryToDictionary
 from app.http.http_client import HTTPClient
+from app.webscraping.britannica import BritannicaScraping
 from app.webscraping.cambridge import CambridgeScraping
 from app.webscraping.oxford import OxfordScraping
 
@@ -54,7 +55,18 @@ class CoreService:
             web_page = CambridgeScraping(web_response=web_page, url=url)
             return web_page.get_definition_from_cambridge_dictionary()
         return {}
+    
+    async def get_definition_from_britannica(self, word: str) -> Dictionary:
+        url = self.env.BRITANNICA_DICTIONARY_URI + word
+        headers = { "User-Agent": "" }
 
+        async with aiohttp.ClientSession() as sessesion:
+            web_page = await self.client.async_get(url=url, session=sessesion,headers=headers,get_html_page=True)
+    
+        if web_page:
+            web_page = BritannicaScraping(web_response=web_page, url=url)
+            return web_page.get_definition_from_britannica_dictionary()
+        return {}
 
 
 

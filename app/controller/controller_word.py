@@ -25,7 +25,8 @@ class ControllerWord:
     async def __get_word_definition_from_web_scraping(self) -> [Dictionary]:
         tasks = {
             'oxford': self.core_service.get_definition_from_oxford(word=self.word),
-            'cambridge': self.core_service.get_definition_from_cambridge(word=self.word)
+            'cambridge': self.core_service.get_definition_from_cambridge(word=self.word),
+            'britannica': self.core_service.get_definition_from_britannica(word=self.word)
         }
 
         return await asyncio.gather(*tasks.values())
@@ -34,8 +35,8 @@ class ControllerWord:
         logger.info(f'Starting process to get definition for {self.word.upper()} word.')
 
         words = [
-            *await self.__get_word_definition_from_api(),
-            *await self.__get_word_definition_from_web_scraping()
+            *await self.__get_word_definition_from_web_scraping(),
+            *await self.__get_word_definition_from_api()
         ]
 
         words = [word for word in words if word != {}]
