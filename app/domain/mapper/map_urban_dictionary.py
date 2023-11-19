@@ -18,7 +18,9 @@ Urban Dictionary API Response
 """
 
 from app.domain.dictionary import Dictionary, MeaningWord, Sources
+from app.configs.logger import get_logger
 
+logger = get_logger(__name__)
 
 class MapUrbanDictionaryToDictionary:
     def __init__(self, url: str) -> None:
@@ -26,15 +28,20 @@ class MapUrbanDictionaryToDictionary:
     
     def mapper(self, definition: list):
         definition = definition.get("list")
+        if not definition:
+            return {}
+        
         definition.sort(key = lambda word : (word["thumbs_up"]), reverse=True)
-
         meanings = []
-        for word in definition[0:3]:
-            meanings.append(MeaningWord(
-                definition=word.get('definition'),
-                examples=[word.get('example')]
-            ))
-        self.dictionary.meaning = meanings
-        self.dictionary.source_url = definition[0].get('permalink')
+        try:            
+            for word in definition[0:3]:
+                meanings.append(MeaningWord(
+                    definition=word.get('definition'),
+                    examples=[word.get('example')]
+                ))
+            self.dictionary.meaning = meanings
+            self.dictionary.source_url = definition[0].get('permalink')
+        except Exception as ex:
+            logger.warning(ex)
         
         return self.dictionary

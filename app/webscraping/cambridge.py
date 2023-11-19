@@ -13,6 +13,8 @@ class CambridgeScraping():
     def get_definition_from_cambridge_dictionary(self):
         try:
             senses = self.web_page.find_all('div', class_='def-block ddef_block')
+            if not senses:
+                return {}
             
             for s in senses:
                 meaning = MeaningWord()

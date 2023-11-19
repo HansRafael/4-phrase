@@ -14,12 +14,14 @@ class HTTPClient:
     
     async def async_get(self, url: str, session: ClientSession, headers: dict, get_html_page=False, params: dict = {}):
         try:
+            logger.info(f'Starting Request: URL :: {url}')
             async with session.get(url=url, params=params, headers=headers) as response:
                 return await self._request_handler(http_response=response, get_html_page=get_html_page)
         except HTTPException as e:
             if e.status_code == 404:
                 logger.warning(f'Word not found! :: {url}')
-            logger.warning(e.detail)
+            else:
+                logger.warning(e.detail)
             return {}
         except ClientConnectorError as ex:
             logger.error(ex.os_error.strerror)
